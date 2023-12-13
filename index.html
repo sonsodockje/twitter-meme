@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>^~^</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="contain">
+        <div class="nav">
+            <p>트윗 밈 찌기</p>
+            <div>
+                <a href="#">강아띠</a>
+            </div>
+        </div>
+        <div class="capArea" id="capArea">
+            <div class="card">
+                <div class="text">
+                    <p id="t1">모든 강아지들 특.jpg</p>
+                    <p>진짜 다 이러는거 인정ㅋㅋㅋㅋㅋㅋㅋ</p>
+                    <p id=" t3">&lt;사람이 귀찮을때</p>
+                    <p style="margin-left: 260px;">&gt;원하는 것 있을 때</p>
+                </div>
+                <div class="imgFlex">
+                    <div class="img Left" id="leftimg" onclick="document.getElementById('left').click();">
+                        <input type="file" id="left" accept=".jpg, .png" onchange="uploding.left(this)">
+                    </div>
+                    <div class="img Right" id="rightimg" onclick="document.getElementById('right').click();">
+                        <input type="file" id="right" accept=".jpg, .png" onchange="uploding.right(this)">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="divBtn">
+            <button id="btn">⭕🙆‍♀️👌🤍🐶</button>
+        </div>
+
+        <div id="preview">
+            <img src="" alt="">
+        </div>
+
+
+
+
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script>
+
+        const captureElement = document.getElementById("capArea");
+        const btn = document.getElementById("btn");
+        const leftimg = document.getElementById("leftimg");
+        const rightimg = document.getElementById("rightimg");
+        const preview = document.getElementById("preview")
+        const preview2 = document.getElementById("preview").firstElementChild;
+
+
+
+        const uploding = {
+            left: (input) => {
+                var file = input.files[0];
+                leftimg.style.backgroundColor = "none;"
+                leftimg.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+            },
+            right: (input) => {
+                var file = input.files[0];
+                leftimg.style.backgroundColor = "none;"
+                rightimg.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+            }
+        }
+
+        btn.addEventListener("click", function () {
+            const canvas = document.createElement("canvas");
+            html2canvas(captureElement).then((canvas) => {
+                const dataURL = canvas.toDataURL();
+                const link = document.createElement("a");
+                // link.download = "capture.png";
+                link.href = dataURL;
+                // link.click();
+                preview.style.display = "block";
+                // preview2.dataset.src = "url(" + link + ")"
+                preview2.setAttribute('src', link)
+
+            });
+        });
+    </script>
+</body>
+
+</html>
